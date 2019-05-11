@@ -3,8 +3,10 @@ package com.wd.tech.app;
 import com.wd.tech.bean.LoginBean;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
+import retrofit2.http.Field;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -23,7 +25,12 @@ public interface Api {
     public Observable<LoginBean> postLogin(@Url String url, @QueryMap HashMap<String,String> map);
 
     @POST
-    public Observable<ResponseBody> postRegist(@Url String url, @Query("sex") int sex,@QueryMap HashMap<String,String> map);
+    public Observable<ResponseBody> postRegist(@Url String url, @Field("sex") int sex,@Field("birthday") String birthday,@Field("lastLoginTime") String lastLoginTime,@Field("nickName") String nickName,@Field("phone") String phone,@Field("pwd") String pwd,@Field("pwd") String pwd2);
 
+    //@POST
+    //public  Observable<ResponseBody> post (@Url String url,@Query(""))
+
+    @POST
+    public Observable<ResponseBody> post(@Url String url, @QueryMap Map<String,String> map);
 
 }

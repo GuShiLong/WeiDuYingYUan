@@ -54,6 +54,7 @@ public class OkHttpUtil {
         login.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
     }
 
+     
     public Observer getRetrofig(final RetrofigIntface retrofigIntface){
         Observer o= new Observer<ResponseBody>() {
             @Override
