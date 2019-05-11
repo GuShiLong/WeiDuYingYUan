@@ -26,6 +26,8 @@
             android:hint="请输入手机号"
             android:ems="13"
             android:id="@+id/edit_phone"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
     </LinearLayout>
 
@@ -49,6 +51,8 @@
             android:password="true"
             android:ems="13"
             android:id="@+id/edit_password"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
         <ImageView
             android:layout_width="@dimen/dp_40"

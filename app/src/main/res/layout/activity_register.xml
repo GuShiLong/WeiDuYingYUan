@@ -26,6 +26,8 @@
             android:hint="请输入昵称"
             android:ems="12"
             android:id="@+id/register_ni"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
     </LinearLayout>
 
@@ -47,6 +49,8 @@
             android:hint="请输入性别"
             android:ems="12"
             android:id="@+id/register_xing"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
     </LinearLayout>
 
@@ -68,6 +72,8 @@
             android:hint="请输入出生日期"
             android:ems="12"
             android:id="@+id/register_chu"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
     </LinearLayout>
 
@@ -89,6 +95,8 @@
             android:hint="请输入手机号"
             android:ems="12"
             android:id="@+id/register_phone"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
     </LinearLayout>
 
@@ -110,6 +118,8 @@
             android:hint="请输入邮箱"
             android:ems="12"
             android:id="@+id/register_youx"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
     </LinearLayout>
 
@@ -131,6 +141,8 @@
             android:hint="请输入密码"
             android:ems="12"
             android:id="@+id/register_pwd"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
             />
     </LinearLayout>
 
