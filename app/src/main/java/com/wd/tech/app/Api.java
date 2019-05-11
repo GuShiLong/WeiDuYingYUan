@@ -7,6 +7,8 @@ import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -21,16 +23,18 @@ import rx.Observable;
  */
 public interface Api {
 
+    @FormUrlEncoded
     @POST
-    public Observable<LoginBean> postLogin(@Url String url, @QueryMap HashMap<String,String> map);
+    public Observable<ResponseBody> postLogin(@Url String url, @FieldMap Map<String,String> map);
 
+    @FormUrlEncoded
     @POST
-    public Observable<ResponseBody> postRegist(@Url String url, @Field("sex") int sex,@Field("birthday") String birthday,@Field("lastLoginTime") String lastLoginTime,@Field("nickName") String nickName,@Field("phone") String phone,@Field("pwd") String pwd,@Field("pwd") String pwd2);
+    public Observable<ResponseBody> postRegist(@Url String url, @Field("sex") int sex,@Field("birthday") String birthday,@Field("email") String email,@Field("nickName") String nickName,@Field("phone") String phone,@Field("pwd") String pwd,@Field("pwd2") String pwd2);
 
     //@POST
     //public  Observable<ResponseBody> post (@Url String url,@Query(""))
 
-    @POST
-    public Observable<ResponseBody> post(@Url String url, @QueryMap Map<String,String> map);
+//    @POST
+//    public Observable<ResponseBody> post(@Url String url, @QueryMap Map<String,String> map);
 
 }

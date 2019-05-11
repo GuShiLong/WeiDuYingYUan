@@ -17,6 +17,6 @@ public interface ContractIntface {
     }
     public interface PresenterIntface{
         public void toLogin(String phone,String pwd);
-        public void toRegister(String phone,String pwd);
+        public void toRegister(int sex,String birthday,String email,String nickName,String phone,String pwd,String pwd2);
     }
 }

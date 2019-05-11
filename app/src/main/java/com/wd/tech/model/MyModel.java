@@ -1,9 +1,14 @@
 package com.wd.tech.model;
 
+import com.google.gson.Gson;
 import com.wd.tech.app.UrlAll;
 import com.wd.tech.bean.LoginBean;
+import com.wd.tech.bean.RegisterBean;
 import com.wd.tech.util.OkHttpUtil;
 
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
 import rx.Observer;
 
 /**
@@ -15,9 +20,10 @@ import rx.Observer;
 public class MyModel {
 
     MyCallLogin myCallLogin;
-    public void postLogin(String phone,String pwd){
+    MyCallRegister myCallRegister;
+    public void postLogin1(String phone,String pwd){
         OkHttpUtil util=OkHttpUtil.getInster();
-        util.postData(UrlAll.URL_LOGIN, phone, pwd, new Observer<LoginBean>() {
+        util.postData(UrlAll.URL_LOGIN, phone, pwd, new Observer<ResponseBody>() {
             @Override
             public void onCompleted() {
 
@@ -29,10 +35,33 @@ public class MyModel {
             }
 
             @Override
-            public void onNext(LoginBean loginBean) {
-                myCallLogin.success(loginBean);
+            public void onNext(ResponseBody responseBody) {
+                try {
+                    String s = responseBody.string();
+                    Gson gson = new Gson();
+                    LoginBean loginBean = gson.fromJson(s, LoginBean.class);
+                    myCallLogin.success(loginBean);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
+    }
+
+    public void postZhuce(int sex,String birthday,String email,String nickName,String phone,String pwd,String pwd2){
+        OkHttpUtil util=OkHttpUtil.getInster();
+        util.postRegister(UrlAll.URL_REGISTER, sex, birthday, email, nickName, phone, pwd, pwd2, new OkHttpUtil.RetrofigIntface() {
+            @Override
+            public void success(Object obj) {
+                String o= (String) obj;
+                Gson gson = new Gson();
+                RegisterBean registerBean = gson.fromJson(o, RegisterBean.class);
+                myCallRegister.success(registerBean);
+            }
+        });
+    }
+    public void setMyCallRegister(MyCallRegister myCallRegister) {
+        this.myCallRegister = myCallRegister;
     }
 
     public void setMyCallLogin(MyCallLogin myCallLogin) {
@@ -40,6 +69,9 @@ public class MyModel {
     }
 
     public interface MyCallLogin{
+        public void success(Object obj);
+    }
+    public interface MyCallRegister{
         public void success(Object obj);
     }
 }

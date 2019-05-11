@@ -13,12 +13,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.wd.tech.R;
 import com.wd.tech.app.App;
 import com.wd.tech.bean.LoginBean;
 import com.wd.tech.contract.ContractIntface;
 import com.wd.tech.presenter.MyPresenter;
+import com.wd.tech.util.EncryptUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements ContractIntface.
         boolean flag = sp.getBoolean("flag", false);
         checkPwd.setChecked(flag);
         if(flag){
-            String name = sp.getString("name", "");
+            String name = sp.getString("phone", "");
             String pwd = sp.getString("pwd", "");
             editPhone.setText(name);
             editPassword.setText(pwd);
@@ -79,7 +79,8 @@ public class LoginActivity extends AppCompatActivity implements ContractIntface.
             public void onClick(View v) {
                 String phone = editPhone.getText().toString();
                 String pwd = editPassword.getText().toString();
-                presenterIntface.toLogin(phone,pwd);
+                String encrypt = EncryptUtil.encrypt(pwd);
+                presenterIntface.toLogin(phone,encrypt);
             }
         });
         textZhuce.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements ContractIntface.
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -96,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements ContractIntface.
         LoginBean loginBean= (LoginBean) obj;
         String phone = editPhone.getText().toString();
         String pwd = editPassword.getText().toString();
-        if(loginBean.getMessage().equals("")){
+        if(loginBean.getMessage().equals("登陆成功")){
             App.Phone=editPhone.getText().toString();
             App.Pwd=editPassword.getText().toString();
             App.SessionId= loginBean.getResult().getSessionId();
@@ -120,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements ContractIntface.
             startActivity(intent);
             finish();
         }else{
-            Toast.makeText(LoginActivity.this,(String)obj,Toast.LENGTH_LONG);
+            Toast.makeText(LoginActivity.this,obj.toString(),Toast.LENGTH_LONG);
         }
     }
 

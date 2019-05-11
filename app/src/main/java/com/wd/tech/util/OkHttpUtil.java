@@ -6,6 +6,7 @@ import com.wd.tech.bean.LoginBean;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -46,14 +47,18 @@ public class OkHttpUtil {
         return util;
     }
 
-    public void postData(String url, String phone, String pwd, Observer<LoginBean> observer){
+    public void postData(String url, String phone, String pwd, Observer<ResponseBody> observer){
         HashMap<String, String> map = new HashMap<>();
         map.put("phone",phone);
         map.put("pwd",pwd);
-        Observable<LoginBean> login = api.postLogin(url, map);
+        Observable<ResponseBody> login = api.postLogin(url, map);
         login.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
     }
 
+    public void postRegister(String url,int sex,String birthday,String email,String nickName,String phone,String pwd,String pwd2,RetrofigIntface retrofigIntface){
+        Observer o= getRetrofig(retrofigIntface);
+        api.postRegist(url,sex,birthday,email,nickName,phone,pwd,pwd2).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(o);
+    }
      
     public Observer getRetrofig(final RetrofigIntface retrofigIntface){
         Observer o= new Observer<ResponseBody>() {

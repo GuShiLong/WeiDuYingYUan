@@ -28,11 +28,18 @@ public class MyPresenter<T> implements ContractIntface.PresenterIntface {
                 userIntface.showLogin(obj);
             }
         });
-        myModel.postLogin(phone,pwd);
+        myModel.postLogin1(phone,pwd);
     }
 
     @Override
-    public void toRegister(String phone, String pwd) {
-
+    public void toRegister(int sex,String birthday,String email,String nickName,String phone,String pwd,String pwd2) {
+        myModel.setMyCallRegister(new MyModel.MyCallRegister() {
+            @Override
+            public void success(Object obj) {
+                ContractIntface.RegisterIntface registerIntface= (ContractIntface.RegisterIntface) view;
+                registerIntface.showRegister(obj);
+            }
+        });
+        myModel.postZhuce(sex, birthday, email, nickName, phone, pwd, pwd2);
     }
 }
