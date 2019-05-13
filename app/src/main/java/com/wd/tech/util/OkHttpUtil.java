@@ -59,7 +59,11 @@ public class OkHttpUtil {
         Observer o= getRetrofig(retrofigIntface);
         api.postRegist(url,sex,birthday,email,nickName,phone,pwd,pwd2).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(o);
     }
-     
+
+    public void getHotData(String url,int userId,String sessionId,RetrofigIntface retrofigIntface){
+        Observer o= getRetrofig(retrofigIntface);
+        api.getHot(url,userId,sessionId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(o);
+    }
     public Observer getRetrofig(final RetrofigIntface retrofigIntface){
         Observer o= new Observer<ResponseBody>() {
             @Override

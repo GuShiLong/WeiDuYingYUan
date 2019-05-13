@@ -42,4 +42,40 @@ public class MyPresenter<T> implements ContractIntface.PresenterIntface {
         });
         myModel.postZhuce(sex, birthday, email, nickName, phone, pwd, pwd2);
     }
+
+    @Override
+    public void toShowHot(String url) {
+        myModel.setMyCallBack1(new MyModel.MyCallBack1() {
+            @Override
+            public void success(Object obj) {
+                ContractIntface.FilmIntface filmIntface= (ContractIntface.FilmIntface) view;
+                filmIntface.showHot(obj);
+            }
+        });
+        myModel.getRemen(url);
+    }
+
+    @Override
+    public void toshowHotshowing(String url) {
+        myModel.setMyCallBack2(new MyModel.MyCallBack2() {
+            @Override
+            public void success(Object obj) {
+                ContractIntface.FilmIntface filmIntface= (ContractIntface.FilmIntface) view;
+                filmIntface.showHotshowing(obj);
+            }
+        });
+        myModel.getReYing(url);
+    }
+
+    @Override
+    public void toshowShangying(String url) {
+        myModel.setMyCallBack3(new MyModel.MyCallBack3() {
+            @Override
+            public void success(Object obj) {
+                ContractIntface.FilmIntface filmIntface= (ContractIntface.FilmIntface) view;
+                filmIntface.showShangying(obj);
+            }
+        });
+        myModel.getJiJiang(url);
+    }
 }

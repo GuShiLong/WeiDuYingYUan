@@ -12,4 +12,10 @@ public class UrlAll {
     public static String URL_LOGIN="movieApi/user/v1/login";
 
     public static String URL_REGISTER="movieApi/user/v1/registerUser";
+
+    public static String URL_HOT="movieApi/movie/v1/findHotMovieList";
+
+    public static String URL_HotShow="movieApi/movie/v1/findReleaseMovieList";
+
+    public static String URL_JiJiang="movieApi/movie/v1/findComingSoonMovieList";
 }

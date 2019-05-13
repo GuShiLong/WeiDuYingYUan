@@ -1,6 +1,7 @@
 package com.wd.tech.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -21,6 +22,7 @@ public class GuidanceActivity extends AppCompatActivity {
     Button btn_start;
     List<Integer> list=new ArrayList<>();
     MyViewAdapter adapter;
+    private SharedPreferences sp;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -36,6 +38,13 @@ public class GuidanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guidance);
+        sp=getSharedPreferences("config",MODE_PRIVATE);
+        boolean flag = sp.getBoolean("flag", false);
+        if(flag){
+            Intent intent=new Intent(GuidanceActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
         viewPager=findViewById(R.id.view_guidance);
         btn_start=findViewById(R.id.btn_start);
 
@@ -73,6 +82,11 @@ public class GuidanceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(GuidanceActivity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
+
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putBoolean("flag",true);
+                edit.commit();
             }
         });
     }

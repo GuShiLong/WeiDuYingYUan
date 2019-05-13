@@ -18,5 +18,13 @@ public interface ContractIntface {
     public interface PresenterIntface{
         public void toLogin(String phone,String pwd);
         public void toRegister(int sex,String birthday,String email,String nickName,String phone,String pwd,String pwd2);
+        public void toShowHot(String url);
+        public void toshowHotshowing(String url);
+        public void toshowShangying(String url);
+    }
+    public interface FilmIntface{
+        public void showHot(Object obj);
+        public void showHotshowing(Object obj);
+        public void showShangying(Object obj);
     }
 }
